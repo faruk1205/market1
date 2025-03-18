@@ -1,0 +1,23 @@
+public class Product implements Weighable {
+    private String name;
+    private double weight; // kg cinsinden
+
+    public Product(String name, double weight) {
+        this.name = name;
+        this.weight = weight;
+    }
+
+    @Override
+    public double getWeight() {
+        return weight;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public static void main(String[] args) {
+        Product apple = new Product("Elma", 0.2);
+        System.out.println(apple.getName() + " ağırlığı: " + apple.getWeight() + " kg");
+    }
+}
