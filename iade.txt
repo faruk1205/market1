@@ -1,0 +1,61 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+class ReturnRequest {
+    private String productName;
+    private String reason;
+    private String invoiceNumber;
+
+    public ReturnRequest(String productName, String reason, String invoiceNumber) {
+        this.productName = productName;
+        this.reason = reason;
+        this.invoiceNumber = invoiceNumber;
+    }
+
+    @Override
+    public String toString() {
+        return "Ürün: " + productName + ", Sebep: " + reason + ", Fatura No: " + invoiceNumber;
+    }
+}
+
+public class MarketReturn {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        List<ReturnRequest> returnRequests = new ArrayList<>();
+
+        while (true) {
+            System.out.println("\n--- Market İade Sistemi ---");
+            System.out.print("Ürün Adı: ");
+            String productName = scanner.nextLine().trim();
+
+            System.out.print("İade Sebebi: ");
+            String reason = scanner.nextLine().trim();
+
+            System.out.print("Fatura Numarası: ");
+            String invoiceNumber = scanner.nextLine().trim();
+
+            if (productName.isEmpty() || reason.isEmpty() || invoiceNumber.isEmpty()) {
+                System.out.println("Hata: Lütfen tüm alanları doldurun!");
+                continue;
+            }
+
+            ReturnRequest request = new ReturnRequest(productName, reason, invoiceNumber);
+            returnRequests.add(request);
+            System.out.println("İade talebiniz kaydedildi!");
+
+            System.out.print("Yeni bir iade kaydı eklemek ister misiniz? (E/H): ");
+            String response = scanner.nextLine().trim().toLowerCase();
+            if (!response.equals("e")) {
+                break;
+            }
+        }
+
+        System.out.println("\n--- Kaydedilen İade Talepleri ---");
+        for (ReturnRequest request : returnRequests) {
+            System.out.println(request);
+        }
+
+        scanner.close();
+    }
+}
